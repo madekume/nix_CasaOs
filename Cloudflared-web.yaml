@@ -1,0 +1,89 @@
+name: cloudflared-web
+services:
+  cloudflared:
+    image: wisdomsky/cloudflared-web:2024.2.1
+    labels:
+      icon: https://cdn.jsdelivr.net/gh/WisdomSky/CasaOS-Coolstore@main/Apps/cloudflared-web/icon.png
+    ports:
+      - target: 14333
+        published: "14333"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/cloudflared-web/config
+        target: /config
+    x-casaos:
+      ports:
+        - container: "14333"
+          description:
+            ar_sa: واجهة مستخدم إعداد الرمز
+            de_de: Token-Setup WebUI
+            en_us: Token Setup WebUI
+            es_es: Configuración de Token WebUI
+            fr_fr: Interface utilisateur de configuration du jeton
+            hu_hu: Token beállítás WebUI
+            it_it: Interfaccia utente di configurazione del token
+            pl_pl: Interfejs użytkownika konfiguracji tokena
+            pt_br: Configuração do Token WebUI
+            ru_ru: Веб-интерфейс настройки токена
+            zh_cn: 令牌设置 WebUI
+      volumes:
+        - container: /config
+          description:
+            ar_sa: يحتوي على ملف تكوين حيث يتم تخزين رمز Cloudflare.
+            de_de: Enthält eine Konfigurationsdatei, in der das Cloudflare-Token gespeichert
+              ist.
+            en_us: Contains config file where cloudflare token is stored.
+            es_es: Contiene un archivo de configuración donde se almacena el token de
+              Cloudflare.
+            fr_fr: Contient un fichier de configuration où est stocké le jeton Cloudflare.
+            hu_hu: Tartalmazza a konfigurációs fájlt, ahol a Cloudflare token van tárolva.
+            it_it: Contiene un file di configurazione in cui è memorizzato il token di
+              Cloudflare.
+            pl_pl: Zawiera plik konfiguracyjny, w którym przechowywany jest token
+              Cloudflare.
+            pt_br: Contém um arquivo de configuração onde o token do Cloudflare é
+              armazenado.
+            ru_ru: Содержит файл конфигурации, в котором хранится токен Cloudflare.
+            zh_cn: 包含配置文件，其中存储了 Cloudflare 令牌。
+    devices: []
+    cap_add: []
+    command: []
+    environment: []
+    network_mode: host
+    privileged: false
+    container_name: ""
+    cpu_shares: 90
+    deploy:
+      resources:
+        limits:
+          memory: 1865M
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  author: WisdomSky
+  category: Coolstore
+  description:
+    en_us: Cloudflared-web packages both Cloudflare tunnel and a simple web-based
+      user interface for easy starting and stopping of cloudflare tunnel.
+  developer: Cloudflare Inc.
+  icon: https://cdn.jsdelivr.net/gh/WisdomSky/CasaOS-Coolstore@main/Apps/cloudflared-web/icon.png
+  main: cloudflared
+  port_map: "14333"
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/WisdomSky/CasaOS-Coolstore@main/Apps/cloudflared-web/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/WisdomSky/CasaOS-Coolstore@main/Apps/cloudflared-web/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/WisdomSky/CasaOS-Coolstore@main/Apps/cloudflared-web/screenshot-3.png
+  store_app_id: cloudflared-web
+  tagline:
+    en_us: Cloudflare tunnel with a simple web-based user interface.
+  thumbnail: https://cdn.jsdelivr.net/gh/WisdomSky/CasaOS-Coolstore@main/Apps/cloudflared-web/icon.png
+  title:
+    en_us: Cloudflared-web
+    custom: ""
+  hostname: ""
+  scheme: http
+  index: /
