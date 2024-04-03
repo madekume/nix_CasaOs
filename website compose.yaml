@@ -1,0 +1,94 @@
+name: invigorating_anthony
+services:
+  adminer:
+    cpu_shares: 90
+    command: []
+    container_name: adminer
+    depends_on:
+      db:
+        condition: service_started
+        required: true
+    deploy:
+      resources:
+        limits:
+          memory: 1865M
+    image: adminer
+    labels:
+      icon: https://icons.iconarchive.com/icons/treetog/junior/256/earth-icon.png
+    ports:
+      - target: 8080
+        published: "8080"
+        protocol: tcp
+    restart: unless-stopped
+    volumes: []
+    devices: []
+    cap_add: []
+    environment: []
+    network_mode: bridge
+    privileged: false
+  db:
+    cpu_shares: 90
+    command: []
+    container_name: mariadb
+    deploy:
+      resources:
+        limits:
+          memory: 1865M
+    environment:
+      - MYSQL_DATABASE=mydb
+      - MYSQL_PASSWORD=mypassword
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=myuser
+    image: mariadb
+    labels:
+      icon: https://icons.iconarchive.com/icons/treetog/junior/256/earth-icon.png
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /tmp/casaos-compose-app-3413777578/mysql
+        target: /var/lib/mysql
+    ports: []
+    devices: []
+    cap_add: []
+    network_mode: bridge
+    privileged: false
+  web:
+    cpu_shares: 90
+    command: []
+    container_name: php8.2-apache
+    depends_on:
+      db:
+        condition: service_started
+        required: true
+    deploy:
+      resources:
+        limits:
+          memory: 1865M
+    image: php:8.2-apache
+    labels:
+      icon: https://icons.iconarchive.com/icons/treetog/junior/256/earth-icon.png
+    ports:
+      - target: 80
+        published: "8000"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /WEB
+        target: /var/www/html
+    devices: []
+    cap_add: []
+    environment: []
+    network_mode: bridge
+    privileged: false
+x-casaos:
+  author: self
+  category: self
+  hostname: ""
+  icon: https://icons.iconarchive.com/icons/treetog/junior/256/earth-icon.png
+  index: /
+  port_map: ""
+  scheme: http
+  store_app_id: invigorating_anthony
+  title:
+    custom: website
